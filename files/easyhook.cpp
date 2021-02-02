@@ -20,7 +20,7 @@ bool easyhook::install_hook(void* entrypoint, void* inhookproc, void* incallback
 bool easyhook::remove_hook(TRACED_HOOK_HANDLE in_handle)
 {
     auto scanner_object = new scanner("EasyHook.dll");
-    auto function_address = (void*)scanner_object->pattern_scan("40 55 56");
+    auto function_address = (void*)scanner_object->pattern_scan("40 53 48 83 EC 20 48 8B D9 48 85 C9 0F 84 ? ? ? ? 48 83 F9 FF 0F 84 ? ? ? ? BA ? ? ? ? 48 89 7C 24 ?");
 
     NTSTATUS(*LhUninstallHook)(TRACED_HOOK_HANDLE) = nullptr;
     LhUninstallHook = reinterpret_cast<decltype(LhUninstallHook)>(function_address);
